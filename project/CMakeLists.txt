@@ -21,10 +21,8 @@ use_cxx11()
 # Use b2 to build boost (see online). 
 # These lines assume boost is installed at ~/boost
 set(BOOST_ROOT ~/boost)
-find_package(Boost)
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIR})
-endif()
+find_package(Boost COMPONENTS program_options REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
 
 
 #*****************************************************************************
@@ -44,6 +42,7 @@ include_directories(${RHD})
 #*****************************************************************************
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} -lm)
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES}
+                                      -lm)
 
 
