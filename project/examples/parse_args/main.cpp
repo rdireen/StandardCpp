@@ -1,6 +1,4 @@
 
-#pragma once
-
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -8,8 +6,8 @@
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
 
-
 using namespace std;
+
 namespace b = boost;
 
 namespace po = b::program_options;
@@ -68,7 +66,7 @@ int parse_args_example(int argc, char* argv[]){
                   options(cmdline_options).positional(p).run(), vm);
 
         // The command line options will be able to override these
-        ifstream ifs("..//cfg//params.cfg");
+        ifstream ifs("params.cfg");
         po::store(po::parse_config_file(ifs, config_file), vm);
 
         po::notify(vm);
@@ -125,23 +123,9 @@ int parse_args_example(int argc, char* argv[]){
         return 1;
     }
 }
+int main(int argc, char * argv[]){
 
+    if(parse_args_example(argc, argv))
+        return 1;
 
-/// An example showing how to format strings
-void format_examples(){
-
-    cout << fmt{"who's cool: %1%"} % "randy" << endl;
-
-    cout << fmt("here's a number: %2.2f") % 3.14159268979 << endl;
-
-    // left align
-    cout << fmt("Integer: %-12i see") % 23555 << endl;
-
-    // right align
-    cout << b::format("Integer: %12i see") % 23555 << endl;
-
-    // add some color
-    cout << b::format("Integer: \33\[33msee\33\[0m") << endl;
-    
 }
-
