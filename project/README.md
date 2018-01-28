@@ -8,4 +8,5 @@ some useful things
 Examples
 --------
 [parse args with Boost](examples/parse_args/)
+
 [Format text with Boost](examples/format_text/)
